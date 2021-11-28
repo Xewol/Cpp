@@ -43,6 +43,13 @@ public:
             bottomToTop(tab.size(), cmp);
         }
     }
+    void pop_front() {
+        const int numb = tab.size();
+        delete tab[0];
+        tab[0] = tab[numb - 1];
+        tab.set_size(tab.size() - 1);
+        topToBottom(0, cmp);
+    }
 
     int print() {
         if (tab.get_ptr() == nullptr)
@@ -87,18 +94,29 @@ private:
 private:
     void topToBottom(const int n, bool (*cmp)(Node<T> *obj1, Node<T> *obj2)) {
 
-        if (n == tab.size())
+        if (n >= tab.size() - 2)
             return;
 
-        if (cmp(tab[n - 1], tab[n - 2]))
-            return;
-        else {
-            Node<T> *temp = tab[n - 2];
-            tab[n - 2] = tab[n - 1];
-            tab[n - 1] = temp;
-        }
+        //mniejszy od obu
+        if (!cmp(tab[n], tab[2 * n + 1]) && !cmp(tab[n], tab[2 * n + 2])) {
+            Node<T> *left = tab[2 * n + 1];
+            Node<T> *right = tab[2 * n + 2];
+            Node<T> *temp;
+            if (cmp(right, left)) {
+                temp = right;
+                tab[2 * n + 2] = tab[n];
+                tab[n] = temp;
+                topToBottom(n + 2, cmp);
 
-        topToBottom(n + 1, cmp);
+            } else {
+                temp = left;
+                tab[2 * n + 1] = tab[n];
+                tab[n] = temp;
+
+                topToBottom(n + 1, cmp);
+            }
+        } else
+            return;
     }
 
     void bottomToTop(const int n, bool (*cmp)(Node<T> *obj1, Node<T> *obj2)) {
@@ -128,7 +146,15 @@ int main(int argc, char const *argv[]) {
     Bh.insert(10);
     Bh.insert(8);
     Bh.insert(31);
-    Bh.insert(40);
+    Bh.insert(24);
+    Bh.insert(76);
+    Bh.insert(11);
+    Bh.insert(43);
+    Bh.insert(56);
+    Bh.insert(12);
+    Bh.print();
+    Bh.pop_front();
+    std::cout << "\n\n";
     Bh.print();
     //Bh.print();
 
