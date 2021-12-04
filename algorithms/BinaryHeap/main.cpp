@@ -138,25 +138,3 @@ private:
 };
 
 } // namespace stnd
-
-int main(int argc, char const *argv[]) {
-
-    stnd::BinaryHeap<int> Bh;
-
-    Bh.insert(10);
-    Bh.insert(8);
-    Bh.insert(31);
-    Bh.insert(24);
-    Bh.insert(76);
-    Bh.insert(11);
-    Bh.insert(43);
-    Bh.insert(56);
-    Bh.insert(12);
-    Bh.print();
-    Bh.pop_front();
-    std::cout << "\n\n";
-    Bh.print();
-    //Bh.print();
-
-    return 0;
-}

@@ -13,22 +13,28 @@ public:
 
         return tabs[id];
     }
-
-    void push_back(T obj) {
-        if (size_ == 0) {
-            tabs = new T[1];
-            tabs[size_] = obj;
-            size_++;
-            return;
-        }
-
-        T *tab_new = new T[size_ + 1];
-        for (size_t i = 0; i < size_; i++) {
+    void resize() {
+        T *tab_new = new T[capacity_ * 2];
+        for (size_t i = 0; i < capacity_ / 2; i++) {
             tab_new[i] = tabs[i];
         }
-        tab_new[size_] = obj;
         delete[] tabs;
         tabs = tab_new;
+        capacity_ *= 2;
+    }
+
+    void push_back(T obj) {
+        if (capacity_ == 0) {
+            tabs = new T[1];
+            tabs[capacity_] = obj;
+            size_++;
+            capacity_++;
+            return;
+        }
+        if (size_ == capacity_)
+            resize();
+
+        tabs[size_] = obj;
         size_++;
     }
 
@@ -48,6 +54,10 @@ public:
     size_t size() {
         return size_;
     }
+    size_t capacity() const {
+
+        return capacity_;
+    }
     void set_size(size_t size) {
         size_ = size;
     }
@@ -58,5 +68,6 @@ public:
 private:
     T *tabs{nullptr};
     size_t size_{0};
+    size_t capacity_{0};
 };
 } // namespace arr
