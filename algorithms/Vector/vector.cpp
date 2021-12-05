@@ -5,6 +5,12 @@ template <class T>
 class Vector {
 
 public:
+    Vector(std::initializer_list<T> list)
+        : tabs(new T[list.size()]) {
+        std::copy(list.begin(), list.end(), tabs);
+        size_ = list.size();
+    }
+    Vector(){};
     T &operator[](size_t id) {
         if (id >= size_) {
             std::cout << "Array index out of range\n\n";
