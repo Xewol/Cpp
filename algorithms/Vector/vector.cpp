@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <math.h>
 
 namespace arr {
 template <class T>
@@ -9,16 +10,20 @@ public:
         : tabs(new T[list.size()]) {
         std::copy(list.begin(), list.end(), tabs);
         size_ = list.size();
+        float capacityHandler = log2(size_);
+        capacity_ = pow(2, ceil(capacityHandler));
     }
     Vector(){};
     T &operator[](size_t id) {
         if (id >= size_) {
-            std::cout << "Array index out of range\n\n";
-            throw "Array index out of range";
+            throw std::out_of_range("Out of Range");
         }
 
         return tabs[id];
     }
+    const T *begin() const { return tabs ? tabs : nullptr; }
+    const T *end() const { return &tabs[size_]; }
+
     void resize() {
         T *tab_new = new T[capacity_ * 2];
         for (size_t i = 0; i < capacity_ / 2; i++) {

@@ -1,2 +1,6 @@
 algorithms/BinaryHeap/main.exe
 algorithms/BinaryHeap/.vscode/settings.json
+algorithms/Sorts/main.exe
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
