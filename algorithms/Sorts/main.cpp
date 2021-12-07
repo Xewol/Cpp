@@ -21,23 +21,23 @@ void CountingSort(arr::Vector<T> &tab) {
 int main(int argc, char const *argv[]) {
 
     arr::Vector<int> tab{9, 7, 4, 3, 6, 5, 1, 2, 8, 11};
-    CountingSort(tab);
-    // std::cout << "Przed sortowaniem:\n";
-    // for (auto &i : tab) {
-    //     std::cout << i << " ";
-    // }
+    std::cout << "Przed sortowaniem:\n";
+    for (auto &i : tab) {
+        std::cout << i << " ";
+    }
 
-    // stnd::BinaryHeap<int> BinaryHeap(tab);
+    stnd::BinaryHeap<int> BinaryHeap(tab);
 
-    // std::cout << "\n\nPo Kopcowaniu:\n";
-    // for (auto &i : tab) {
-    //     std::cout << i << " ";
-    // }
-    // BinaryHeap.sort(tab, tab.size());
+    std::cout << "\n\nPo Kopcowaniu:\n";
+    for (auto &i : tab) {
+        std::cout << i << " ";
+    }
+    BinaryHeap.sort(tab, tab.size());
 
-    // std::cout << "\n\nPo Sortowaniu:\n";
-    // for (auto &i : tab) {
-    //     std::cout << i << " ";
-    // }
-    // return 0;
+    std::cout << "\n\nPo Sortowaniu:\n";
+    for (auto &i : tab) {
+        std::cout << i << " ";
+    }
+
+    return 0;
 }
