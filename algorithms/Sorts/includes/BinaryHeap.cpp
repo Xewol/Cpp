@@ -94,7 +94,7 @@ public:
     void sort(arr::Vector<T> &_tab, int n) {
 
         for (int i = n; i > 0; i--) {
-            stnd::Swap(_tab[0], _tab[i - 1]);
+            stnd::Swap<T>(_tab[0], _tab[i - 1]);
             HeapToBottom(_tab, 0, i - 1);
         }
     }
@@ -155,7 +155,7 @@ private:
         int dziecko = _tab[n - 1];
         int rodzic = _tab[floor((n - 2) / 2)];
         if (dziecko > rodzic) {
-            stnd::Swap(_tab[n - 1], _tab[floor((n - 2) / 2)]);
+            stnd::Swap<T>(_tab[n - 1], _tab[floor((n - 2) / 2)]);
         }
         HeapToTop(_tab, n - 1);
     }
@@ -171,13 +171,13 @@ private:
         if (left > right) {
             if (_tab[n] > _tab[2 * n + 1])
                 return;
-            stnd::Swap(_tab[n], _tab[2 * n + 1]);
+            stnd::Swap<T>(_tab[n], _tab[2 * n + 1]);
             HeapToBottom(_tab, 2 * n + 1, size);
 
         } else {
             if (_tab[n] > _tab[2 * n + 2])
                 return;
-            stnd::Swap(_tab[n], _tab[2 * n + 2]);
+            stnd::Swap<T>(_tab[n], _tab[2 * n + 2]);
             HeapToBottom(_tab, 2 * n + 2, size);
         }
     }
