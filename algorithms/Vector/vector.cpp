@@ -26,7 +26,7 @@ public:
 
     void resize() {
         T *tab_new = new T[capacity_ * 2];
-        for (size_t i = 0; i < capacity_ / 2; i++) {
+        for (size_t i = 0; i < capacity_; i++) {
             tab_new[i] = tabs[i];
         }
         delete[] tabs;
