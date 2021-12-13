@@ -78,24 +78,21 @@ int main(int argc, char const *argv[]) {
     stnd::Vector<int> tab1;
     stnd::Vector<int> tab2;
     stnd::Vector<int> tab3;
-    cnt::BinaryHeap test(tab3);
-    stnd::Vector<int> tab4{1, 2, 4, 5, 34, 65, 1, 5, 1, 2, 54, 1};
     std::random_device random_device;
     std::mt19937_64 engine(random_device());
     std::uniform_int_distribution<uint64_t> dist(1, 1000000);
 
-    {
-        for (int i = 0; i < 1000000; i++) {
-            tab1.push_back(dist(engine));
-            tab2.push_back(tab1[i]);
-            tab3.push_back(tab2[i]);
-        }
+    for (int i = 0; i < 1000000; i++) {
+        tab1.push_back(dist(engine));
+        tab2.push_back(tab1[i]);
+        tab3.push_back(tab2[i]);
     }
 
-    BucketSort(tab2);
-    for (auto &i : tab2) {
-        std::cout << i << std::endl;
+    std::cout << "\n";
+    cnt::BinaryHeap<int> test(tab3);
+    test.sort(tab3);
+    for (auto &i : tab3) {
+        std::cout << i << "\n";
     }
-    //TODO pomierzyc czasy
     return 0;
 }

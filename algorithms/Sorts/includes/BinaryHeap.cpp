@@ -30,30 +30,17 @@ bool cmp(Node<T> *obj1, Node<T> *obj2) {
     return obj1->get_data() >= obj2->get_data();
 }
 
-namespace stnd {
+namespace cnt {
 
 template <class T>
 class BinaryHeap {
 
 public:
-    BinaryHeap(arr::Vector<T> &_tab) {
+    BinaryHeap(stnd::Vector<T> &_tab) {
+        for (int i = 0; i < _tab.size(); i++) {
 
-        HeapToTop(_tab, _tab.size());
-    }
-
-    void insert(T value) {
-        Node<T> *obj = new Node<T>(value);
-        tab.push_back(obj);
-        if (tab.size() >= 2) {
-            bottomToTop(tab.size(), cmp);
+            HeapToTop(i, _tab, _tab.size());
         }
-    }
-    void pop_front() {
-        const int numb = tab.size();
-        delete tab[0];
-        tab[0] = tab[numb - 1];
-        tab.set_size(tab.size() - 1);
-        topToBottom(0, cmp);
     }
 
     int print() {
@@ -91,76 +78,33 @@ public:
     void clear() {
         tab.clear();
     }
-    void sort(arr::Vector<T> &_tab, int n) {
+    void sort(stnd::Vector<T> &_tab) {
 
-        for (int i = n; i > 0; i--) {
+        for (int i = _tab.size(); i > 0; i--) {
             stnd::Swap<T>(_tab[0], _tab[i - 1]);
             HeapToBottom(_tab, 0, i - 1);
         }
     }
 
 private:
-    arr::Vector<T>
+    stnd::Vector<T>
         tab;
 
 private:
-    void topToBottom(const int n, bool (*cmp)(Node<T> *obj1, Node<T> *obj2)) {
+    void HeapToTop(const int i, stnd::Vector<T> &_tab, const int n) {
 
-        if (n >= tab.size() - 2)
+        if (n == 0 || i <= 0)
             return;
 
-        //mniejszy od obu
-        if (!cmp(tab[n], tab[2 * n + 1]) && !cmp(tab[n], tab[2 * n + 2])) {
-            Node<T> *left = tab[2 * n + 1];
-            Node<T> *right = tab[2 * n + 2];
-            Node<T> *temp;
-            if (cmp(right, left)) {
-                temp = right;
-                tab[2 * n + 2] = tab[n];
-                tab[n] = temp;
-                topToBottom(n + 2, cmp);
-
-            } else {
-                temp = left;
-                tab[2 * n + 1] = tab[n];
-                tab[n] = temp;
-
-                topToBottom(n + 1, cmp);
-            }
-        } else
-            return;
-    }
-
-    void bottomToTop(const int n, bool (*cmp)(Node<T> *obj1, Node<T> *obj2)) {
-
-        if (n == 1)
-            return;
-
-        if (cmp(tab[n - 1], tab[n - 2])) {
-
-            Node<T> *temp = tab[n - 2];
-            tab[n - 2] = tab[n - 1];
-            tab[n - 1] = temp;
-
-        } else
-            return;
-
-        bottomToTop(n - 1, cmp);
-    }
-
-    void HeapToTop(arr::Vector<T> &_tab, const int n) {
-
-        if (n == 0)
-            return;
-        int dziecko = _tab[n - 1];
-        int rodzic = _tab[floor((n - 2) / 2)];
-        if (dziecko > rodzic) {
-            stnd::Swap<T>(_tab[n - 1], _tab[floor((n - 2) / 2)]);
+        int dziecko = i;
+        int rodzic = (dziecko - 1) / 2;
+        if (_tab[dziecko] > _tab[rodzic]) {
+            stnd::Swap<T>(_tab[dziecko], _tab[rodzic]);
+            HeapToTop(rodzic, _tab, n - 1);
         }
-        HeapToTop(_tab, n - 1);
     }
 
-    void HeapToBottom(arr::Vector<T> &_tab, int n, int size) {
+    void HeapToBottom(stnd::Vector<T> &_tab, int n, int size) {
 
         if (2 * n + 1 >= size)
             return;
@@ -182,4 +126,4 @@ private:
         }
     }
 };
-} // namespace stnd
+} // namespace cnt

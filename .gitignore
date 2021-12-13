@@ -4,3 +4,10 @@ algorithms/Sorts/main.exe
 .vscode/settings.json
 .vscode/launch.json
 .vscode/tasks.json
+algorithms/.vscode/launch.json
+algorithms/.vscode/settings.json
+.gitignore
+algorithms/Sorts/Sorts.exe
+.gitignore
+algorithms/Vector/Vector.exe
+algorithms/.vscode/tasks.json

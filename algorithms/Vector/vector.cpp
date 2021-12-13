@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <math.h>
 
-namespace arr {
+namespace stnd {
 template <class T>
 class Vector {
 
@@ -60,6 +60,7 @@ public:
             delete[] tabs;
             tabs = nullptr;
             size_ = 0;
+            capacity_ = 0;
         }
     }
     size_t size() {
@@ -81,4 +82,4 @@ private:
     size_t size_{0};
     size_t capacity_{0};
 };
-} // namespace arr
+} // namespace stnd

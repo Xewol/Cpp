@@ -30,7 +30,7 @@ bool cmp(Node<T> *obj1, Node<T> *obj2) {
     return obj1->get_data() >= obj2->get_data();
 }
 
-namespace stnd {
+namespace cnt {
 
 template <class T>
 class BinaryHeap {
@@ -137,4 +137,4 @@ private:
     }
 };
 
-} // namespace stnd
+} // namespace cnt
