@@ -1,4 +1,5 @@
 #include "./includes/BinaryHeap.cpp"
+#include <iomanip>
 #include <iostream>
 #include <random>
 #include <time.h>
@@ -73,11 +74,12 @@ void CountingSort(stnd::Vector<int> &vec) {
 
 int main(int argc, char const *argv[]) {
 
-    clock_t start, end;
+    clock_t start1, start2, start3, end1, end2, end3;
     double time1, time2, time3;
     stnd::Vector<int> tab1;
     stnd::Vector<int> tab2;
     stnd::Vector<int> tab3;
+
     std::random_device random_device;
     std::mt19937_64 engine(random_device());
     std::uniform_int_distribution<uint64_t> dist(1, 1000000);
@@ -88,11 +90,30 @@ int main(int argc, char const *argv[]) {
         tab3.push_back(tab2[i]);
     }
 
-    std::cout << "\n";
+    start1 = clock();
+    CountingSort(tab1);
+    end1 = clock();
+
+    time1 = double(end1 - start1) / double(CLOCKS_PER_SEC);
+
+    start2 = clock();
+    BucketSort(tab2);
+    end2 = clock();
+
+    time2 = double(end2 - start2) / double(CLOCKS_PER_SEC);
+
+    start3 = clock();
     cnt::BinaryHeap<int> test(tab3);
     test.sort(tab3);
-    for (auto &i : tab3) {
-        std::cout << i << "\n";
-    }
+    end3 = clock();
+
+    time3 = double(end3 - start3) / double(CLOCKS_PER_SEC);
+
+    std::cout << "Counting sort: " << time1 << std::setprecision(5) << std::endl;
+    std::cout << "Bucket sort: " << time2 << std::setprecision(5) << std::endl;
+    std::cout << "Heap sort: " << time3 << std::setprecision(5) << std::endl;
+
     return 0;
 }
+
+// odmierzanie czasu
